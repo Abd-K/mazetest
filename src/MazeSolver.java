@@ -17,7 +17,7 @@ public class MazeSolver {
 
 
     MazeSolver() throws IOException {
-        RawFileReader rw = new RawFileReader("resources/input.txt");
+        RawFileReader rw = new RawFileReader("resources/medium_input.txt");
         mazeArray = rw.initializeArrayInputAsArray();
 
         startLocationX = rw.getStartLocationX();
@@ -33,14 +33,10 @@ public class MazeSolver {
     }
 
     private void solveMaze(int currentLocationY, int currentLocationX) throws IOException {
-        // if current spot is not end location
-//        System.out.println(Arrays.deepToString(mazeArray));
-//        System.out.println(mazeArray[2][1]);
+        // if current spot is end location
         if (currentLocationX == endLocationX && currentLocationY == endLocationY) {
-            //TODO if new locaiton is end
             System.out.println("Route successfully found");
-            //iterate till we get to end location
-            //
+            //iterate till end location is found
         } else if (checkNorth(currentLocationY, currentLocationX)) {
                 previousLocationX = currentLocationX;
                 previousLocationY = currentLocationY;

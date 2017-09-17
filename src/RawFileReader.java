@@ -6,7 +6,6 @@ import java.io.IOException;
  */
 public class RawFileReader {
     private String rawFile;
-    private String maze;
 
     private int arrayWidth;
     private int arrayHeight;
@@ -15,16 +14,11 @@ public class RawFileReader {
     private int startLocationY;
 
     private int endLocationX;
-
     private int endLocationY;
 
     public RawFileReader(String filePath) throws IOException {
         readFile(filePath);
-        initializeArraySize();
-        initializeStartLocation();
-        initializeEndLocation();
-        initializeMaze();
-
+        initializeArrayInputAsArray();
     }
 
     public int getEndLocationY() {
@@ -46,7 +40,8 @@ public class RawFileReader {
     public String[][] initializeArrayInputAsArray() throws IOException {
         String[][] list = new String[arrayWidth][arrayHeight];
         String[] line;
-        line = (maze.split("\n"));
+
+        line = (rawFile.split("\n"));
         for (int i = 0; i < arrayHeight; i++) {
             list[i] = line[i].split(" ");
         }
@@ -57,37 +52,40 @@ public class RawFileReader {
         BufferedReader br = new BufferedReader(new java.io.FileReader(filePath));
         try {
             StringBuilder sb = new StringBuilder();
+
+            //get first line for array size
+            initializeArraySize(br.readLine());
+            //get start position
+            initializeStartLocation(br.readLine());
+            //get end position
+            initializeEndLocation(br.readLine());
+
+            //read rest of text file
             String line = br.readLine();
             while (line != null) {
                 sb.append(line);
                 sb.append(System.lineSeparator());
                 line = br.readLine();
             }
-            String textInput = sb.toString();
-            rawFile = textInput;
+            rawFile = sb.toString();
         } finally {
             br.close();
         }
     }
 
-    private void initializeArraySize() {
-        arrayWidth = Integer.parseInt(String.valueOf(rawFile.charAt(0)));
-        arrayHeight = Integer.parseInt(String.valueOf(rawFile.charAt(2)));
+    private void initializeArraySize(String s) {
+        arrayWidth = Integer.parseInt(s.split(" ")[0]);
+        arrayHeight = Integer.parseInt(s.split(" ")[1]);
     }
 
-    private void initializeStartLocation() {
-        startLocationX = Integer.parseInt(String.valueOf(rawFile.charAt(4)));
-        startLocationY = Integer.parseInt(String.valueOf(rawFile.charAt(6)));
+    private void initializeStartLocation(String s) {
+        startLocationX = Integer.parseInt(s.split(" ")[0]);
+        startLocationY = Integer.parseInt(s.split(" ")[1]);
     }
 
-    private void initializeEndLocation() {
-        endLocationX = Integer.parseInt(String.valueOf(rawFile.charAt(8)));
-        endLocationY = Integer.parseInt(String.valueOf(rawFile.charAt(10)));
+    private void initializeEndLocation(String s) {
+        endLocationX = Integer.parseInt(s.split(" ")[0]);
+        endLocationY = Integer.parseInt(s.split(" ")[1]);
     }
-
-    private void initializeMaze() {
-        maze = rawFile.substring(12);
-    }
-
 
 }
