@@ -10,21 +10,15 @@ public class MazeSolver {
     private int endLocationX;
     private int endLocationY;
 
-    private int previousLocationX;
-    private int previousLocationY;
-
-    private String[][] mazeArray;
+    private Location[][] loc ;
 
 
     MazeSolver() throws IOException {
         RawFileReader rw = new RawFileReader("resources/medium_input.txt");
-        mazeArray = rw.initializeArrayInputAsArray();
+        initArray(rw.initializeArrayInputAsArray(), rw.getArrayHeight(), rw.getArrayWidth());
 
         startLocationX = rw.getStartLocationX();
         startLocationY = rw.getStartLocationY();
-
-        previousLocationX = startLocationX;
-        previousLocationY = startLocationY;
 
         endLocationX = rw.getEndLocationX();
         endLocationY = rw.getEndLocationY();
@@ -32,54 +26,44 @@ public class MazeSolver {
         solveMaze(startLocationY, startLocationX);
     }
 
+    private void initArray(String[][] arr, int arrayHeight, int arrayWidth) {
+        loc = new Location[arrayHeight][arrayWidth];
+        for( int i=0 ; i <arrayHeight;i++) {
+            for (int j =0; j<arrayWidth;j++){
+                loc[i][j] = new Location(Integer.parseInt(arr[i][j]));
+            }
+
+        }
+    }
+
     private void solveMaze(int currentLocationY, int currentLocationX) throws IOException {
         // if current spot is end location
         if (currentLocationX == endLocationX && currentLocationY == endLocationY) {
             System.out.println("Route successfully found");
+
             //iterate till end location is found
-        } else if (checkNorth(currentLocationY, currentLocationX)) {
-                previousLocationX = currentLocationX;
-                previousLocationY = currentLocationY;
-                solveMaze(currentLocationY - 1 , currentLocationX);
-            }  else if (checkSouth(currentLocationY, currentLocationX)) {
-                previousLocationX = currentLocationX;
-                previousLocationY = currentLocationY;
-                solveMaze(currentLocationY + 1, currentLocationX);
-            } else if (checkEast(currentLocationY, currentLocationX)) {
-                previousLocationX = currentLocationX;
-                previousLocationY = currentLocationY;
-                solveMaze(currentLocationY , currentLocationX - 1);
-            } else if (checkWest(currentLocationY, currentLocationX)) {
-                previousLocationX = currentLocationX;
-                previousLocationY = currentLocationY;
-                solveMaze(currentLocationY , currentLocationX + 1);
-            } else {
-                System.out.println("No possible solution");
+
+            //if direction is 0 iterate, but also check all other positions
         }
+        else {
+            //check north
+            checkDirection(currentLocationY-1, currentLocationX,currentLocationY, currentLocationX);
+            //check south
+            checkDirection(currentLocationY+1, currentLocationX,currentLocationY, currentLocationX);
+            //check east
+            checkDirection(currentLocationY, currentLocationX+1,currentLocationY, currentLocationX);
+            //check west
+            checkDirection(currentLocationY, currentLocationX-1,currentLocationY, currentLocationX);
 
+        }
+        //TODO when no solution is possible
+//        System.out.println("No possible solution");
     }
 
-    private Boolean isNewPassage(int locationY, int locationX){
-        return locationY != previousLocationY || locationX != previousLocationX;
-    }
-
-    private Boolean checkNorth(int locationY, int locationX) {
-        return mazeArray[locationY - 1][locationX].equals("0") &&
-                isNewPassage(locationY - 1, locationX);
-    }
-
-    private Boolean checkSouth(int locationY, int locationX) {
-        return mazeArray[locationY + 1][locationX].equals("0") &&
-                isNewPassage(locationY + 1, locationX);
-    }
-
-    private Boolean checkEast(int locationY, int locationX) {
-        return mazeArray[locationY][locationX-1].equals("0") &&
-                isNewPassage(locationY, locationX-1);
-    }
-
-    private Boolean checkWest(int locationY, int locationX) {
-        return mazeArray[locationY][locationX+1].equals("0") &&
-                isNewPassage(locationY, locationX+1);
+    private void checkDirection(int newLocationY, int newLocationX, int currentLocationY, int currentLocationX) throws IOException {
+       if(loc[newLocationY][newLocationX].isTraversablePassage()) {
+           loc[newLocationY][newLocationX].setLocation();
+           solveMaze(newLocationY, newLocationX);
+       }
     }
 }

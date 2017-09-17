@@ -21,6 +21,14 @@ public class RawFileReader {
         initializeArrayInputAsArray();
     }
 
+    public int getArrayHeight() {
+        return arrayHeight;
+    }
+
+    public int getArrayWidth() {
+        return arrayWidth;
+    }
+
     public int getEndLocationY() {
         return endLocationY;
     }
@@ -38,7 +46,7 @@ public class RawFileReader {
     }
 
     public String[][] initializeArrayInputAsArray() throws IOException {
-        String[][] list = new String[arrayWidth][arrayHeight];
+        String[][] list = new String[arrayHeight][arrayWidth];
         String[] line;
 
         line = (rawFile.split("\n"));
