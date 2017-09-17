@@ -29,60 +29,61 @@ public class MazeSolver {
         endLocationX = rw.getEndLocationX();
         endLocationY = rw.getEndLocationY();
 
-        solveMaze(startLocationX, startLocationY);
+        solveMaze(startLocationY, startLocationX);
     }
 
-    private void solveMaze(int currentLocationX, int currentLocationY) throws IOException {
+    private void solveMaze(int currentLocationY, int currentLocationX) throws IOException {
         // if current spot is not end location
+//        System.out.println(Arrays.deepToString(mazeArray));
+//        System.out.println(mazeArray[2][1]);
         if (currentLocationX == endLocationX && currentLocationY == endLocationY) {
             //TODO if new locaiton is end
-            System.out.println("at end");
+            System.out.println("Route successfully found");
             //iterate till we get to end location
-            //TODO if not possible to get to end location
             //
-        } else {
-            if (checkNorth(currentLocationX, currentLocationY)) {
+        } else if (checkNorth(currentLocationY, currentLocationX)) {
                 previousLocationX = currentLocationX;
                 previousLocationY = currentLocationY;
-                solveMaze(currentLocationX, currentLocationY -1);
-            }  else if (checkSouth(currentLocationX, currentLocationY +1)) {
+                solveMaze(currentLocationY - 1 , currentLocationX);
+            }  else if (checkSouth(currentLocationY, currentLocationX)) {
                 previousLocationX = currentLocationX;
                 previousLocationY = currentLocationY;
-                solveMaze(currentLocationX, currentLocationY +1);
-            } else if (checkEast(currentLocationX -1, currentLocationY)) {
+                solveMaze(currentLocationY + 1, currentLocationX);
+            } else if (checkEast(currentLocationY, currentLocationX)) {
                 previousLocationX = currentLocationX;
                 previousLocationY = currentLocationY;
-                solveMaze(currentLocationX -1, currentLocationY);
-            } else if (checkWest(currentLocationX +1, currentLocationY)) {
+                solveMaze(currentLocationY , currentLocationX - 1);
+            } else if (checkWest(currentLocationY, currentLocationX)) {
                 previousLocationX = currentLocationX;
                 previousLocationY = currentLocationY;
-                solveMaze(currentLocationX +1, currentLocationY);
-            }
+                solveMaze(currentLocationY , currentLocationX + 1);
+            } else {
+                System.out.println("No possible solution");
         }
 
     }
 
-    private Boolean isNewPassage(int locationX, int locationY){
-        return locationX != previousLocationX && locationY != previousLocationY;
+    private Boolean isNewPassage(int locationY, int locationX){
+        return locationY != previousLocationY || locationX != previousLocationX;
     }
 
-    private Boolean checkNorth(int locationX, int locationY) {
-        return mazeArray[locationX][locationY-1].equals("0") &&
-                isNewPassage(locationX, locationY-1);
+    private Boolean checkNorth(int locationY, int locationX) {
+        return mazeArray[locationY - 1][locationX].equals("0") &&
+                isNewPassage(locationY - 1, locationX);
     }
 
-    private Boolean checkSouth(int locationX, int locationY) {
-        return mazeArray[locationX][locationY+1].equals("0") &&
-                isNewPassage(locationX, locationY+1);
+    private Boolean checkSouth(int locationY, int locationX) {
+        return mazeArray[locationY + 1][locationX].equals("0") &&
+                isNewPassage(locationY + 1, locationX);
     }
 
-    private Boolean checkEast(int locationX, int locationY) {
-        return mazeArray[locationX-1][locationY].equals("0") &&
-                isNewPassage(locationX-1, locationY);
+    private Boolean checkEast(int locationY, int locationX) {
+        return mazeArray[locationY][locationX-1].equals("0") &&
+                isNewPassage(locationY, locationX-1);
     }
 
-    private Boolean checkWest(int locationX, int locationY) {
-        return mazeArray[locationX+1][locationY].equals("0") &&
-                isNewPassage(locationX+1, locationY);
+    private Boolean checkWest(int locationY, int locationX) {
+        return mazeArray[locationY][locationX+1].equals("0") &&
+                isNewPassage(locationY, locationX+1);
     }
 }
