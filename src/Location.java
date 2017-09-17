@@ -3,20 +3,28 @@
  */
 public class Location {
 
-    private Boolean isNewLocation = true;
+
+    private Boolean isVisitedLocation = false;
     private int locationValue;
 
     public Location(int locationValue) {
         this.locationValue = locationValue;
     }
 
-    public void setLocation() {
-        this.isNewLocation = false;
+    public void setLocationVisited() {
+        this.isVisitedLocation = true;
+    }
+
+    public Boolean getVisitedLocation() {
+        return isVisitedLocation;
+    }
+
+    public int getLocationValue() {
+        return locationValue;
     }
 
     public Boolean isTraversablePassage() {
-
-        return locationValue == 0 && isNewLocation;
+        return locationValue == 0 && !isVisitedLocation;
     }
 
 }

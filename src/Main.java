@@ -6,6 +6,14 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        new MazeSolver();
+//        new MazeSolver("resources/input.txt");
+//        new MazeSolver("resources/myinput.txt");
+        new MazeSolver("resources/small2.txt");
+//        new MazeSolver("resources/small.txt");
+//        new MazeSolver("resources/sparse_medium.txt");
+//        new MazeSolver("resources/medium_input.txt");
+//        new MazeSolver("resources/large_input.txt");
     }
+
+    //TODO test all the files with expect outputs
 }
