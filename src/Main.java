@@ -15,5 +15,8 @@ public class Main {
 //        new MazeSolver("resources/large_input.txt");
     }
 
-    //TODO test all the files with expect outputs
+    //TODO test all the files with expected outputs
+    private static void assertArraysMatch(String[][] actualArray, String[][] expectedArray){
+
+    }
 }

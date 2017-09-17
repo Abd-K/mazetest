@@ -18,7 +18,65 @@ public class RawFileReader {
 
     public RawFileReader(String filePath) throws IOException {
         readFile(filePath);
-        initializeArrayInputAsArray();
+        initialiseArrayInputAsArray();
+    }
+
+    /*
+        return the maze as a multidimensional array of strings with values of 0 or 1
+     */
+    public String[][] initialiseArrayInputAsArray() throws IOException {
+        String[][] list = new String[arrayHeight][arrayWidth];
+        String[] line;
+
+        line = (rawFile.split("\n"));
+        for (int i = 0; i < arrayHeight; i++) {
+            list[i] = line[i].split(" ");
+        }
+        return list;
+    }
+
+    /*
+        fetches the values from first 3 lines, and sets them to appropriate int values
+        then returns the rest of the text file as a String representing the maze
+    */
+    private void readFile(String filePath) throws IOException {
+        BufferedReader br = new BufferedReader(new java.io.FileReader(filePath));
+        try {
+            StringBuilder sb = new StringBuilder();
+
+            //get first line for array size
+            initialiseArraySize(br.readLine());
+            //get start position
+            initialiseStartLocation(br.readLine());
+            //get end position
+            initialiseEndLocation(br.readLine());
+
+            //read rest of text file
+            String line = br.readLine();
+            while (line != null) {
+                sb.append(line);
+                sb.append(System.lineSeparator());
+                line = br.readLine();
+            }
+            rawFile = sb.toString();
+        } finally {
+            br.close();
+        }
+    }
+
+    private void initialiseArraySize(String s) {
+        arrayWidth = Integer.parseInt(s.split(" ")[0]);
+        arrayHeight = Integer.parseInt(s.split(" ")[1]);
+    }
+
+    private void initialiseStartLocation(String s) {
+        startLocationX = Integer.parseInt(s.split(" ")[0]);
+        startLocationY = Integer.parseInt(s.split(" ")[1]);
+    }
+
+    private void initialiseEndLocation(String s) {
+        endLocationX = Integer.parseInt(s.split(" ")[0]);
+        endLocationY = Integer.parseInt(s.split(" ")[1]);
     }
 
     public int getArrayHeight() {
@@ -44,56 +102,4 @@ public class RawFileReader {
     public int getStartLocationX() {
         return startLocationX;
     }
-
-    public String[][] initializeArrayInputAsArray() throws IOException {
-        String[][] list = new String[arrayHeight][arrayWidth];
-        String[] line;
-
-        line = (rawFile.split("\n"));
-        for (int i = 0; i < arrayHeight; i++) {
-            list[i] = line[i].split(" ");
-        }
-        return list;
-    }
-
-    private void readFile(String filePath) throws IOException {
-        BufferedReader br = new BufferedReader(new java.io.FileReader(filePath));
-        try {
-            StringBuilder sb = new StringBuilder();
-
-            //get first line for array size
-            initializeArraySize(br.readLine());
-            //get start position
-            initializeStartLocation(br.readLine());
-            //get end position
-            initializeEndLocation(br.readLine());
-
-            //read rest of text file
-            String line = br.readLine();
-            while (line != null) {
-                sb.append(line);
-                sb.append(System.lineSeparator());
-                line = br.readLine();
-            }
-            rawFile = sb.toString();
-        } finally {
-            br.close();
-        }
-    }
-
-    private void initializeArraySize(String s) {
-        arrayWidth = Integer.parseInt(s.split(" ")[0]);
-        arrayHeight = Integer.parseInt(s.split(" ")[1]);
-    }
-
-    private void initializeStartLocation(String s) {
-        startLocationX = Integer.parseInt(s.split(" ")[0]);
-        startLocationY = Integer.parseInt(s.split(" ")[1]);
-    }
-
-    private void initializeEndLocation(String s) {
-        endLocationX = Integer.parseInt(s.split(" ")[0]);
-        endLocationY = Integer.parseInt(s.split(" ")[1]);
-    }
-
 }

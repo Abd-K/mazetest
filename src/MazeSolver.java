@@ -19,7 +19,7 @@ public class MazeSolver {
     //constructor which expects file path
     MazeSolver(String textFilePath) throws IOException {
         RawFileReader rw = new RawFileReader(textFilePath);
-        initGrid(rw.initializeArrayInputAsArray(), rw.getArrayHeight(), rw.getArrayWidth());
+        initialiseGrid(rw.initialiseArrayInputAsArray(), rw.getArrayHeight(), rw.getArrayWidth());
 
         startLocationX = rw.getStartLocationX();
         startLocationY = rw.getStartLocationY();
@@ -27,15 +27,13 @@ public class MazeSolver {
         endLocationX = rw.getEndLocationX();
         endLocationY = rw.getEndLocationY();
 
-        grid[startLocationY][startLocationX].setLocationVisited();
-
         solveMaze(startLocationY, startLocationX);
         if(endLocationFound) {
             outputGrid();
         }
     }
 
-    private void initGrid(String[][] array, int arrayHeight, int arrayWidth) {
+    private void initialiseGrid(String[][] array, int arrayHeight, int arrayWidth) {
         this.arrayHeight = arrayHeight;
         this.arrayWidth = arrayWidth;
         grid = new Location[this.arrayHeight][arrayWidth];
@@ -47,18 +45,21 @@ public class MazeSolver {
     }
 
     //TODO find more efficient algorithm than a linear solution
+    //TODO work forwards and backwards simultaneously
     /*
         recursive method, checks 4 directions from current location, if
         location is new and is traversable, set as new current location and
         recurse through method again till all reachable locations are checked
      */
-    private Boolean solveMaze(int currentLocationY, int currentLocationX) throws IOException {
+    private Boolean solveMaze(Location[][] grid, String[][] output, int currentLocationY, int currentLocationX) throws IOException {
+        //set initial location as visited, to stop recursive function from returning to start location
+        grid[currentLocationY][currentLocationX].setLocationVisited();
+
         // if current location is at end location
         if (currentLocationX == endLocationX && currentLocationY == endLocationY) {
             endLocationFound = true;
             return endLocationFound;
-        }
-        else if(!endLocationFound){
+        } else if(!endLocationFound){ //stops further search if solution's found, however pending recursions continue
             //checks 4 directions from current location
             //check east
             checkDirection(currentLocationY, currentLocationX+1);
