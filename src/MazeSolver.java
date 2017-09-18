@@ -13,11 +13,14 @@ public class MazeSolver {
     private int arrayHeight;
     private int arrayWidth;
 
+    private Location[][] grid;
+    private String[][] initialOutput;
     private Boolean endLocationFound = false;
-    private Location[][] grid ;
+
 
     //constructor which expects file path
     MazeSolver(String textFilePath) throws IOException {
+
         RawFileReader rw = new RawFileReader(textFilePath);
         initialiseGrid(rw.initialiseArrayInputAsArray(), rw.getArrayHeight(), rw.getArrayWidth());
 
@@ -27,17 +30,20 @@ public class MazeSolver {
         endLocationX = rw.getEndLocationX();
         endLocationY = rw.getEndLocationY();
 
-        solveMaze(startLocationY, startLocationX);
-        if(endLocationFound) {
-            outputGrid();
-        }
+        solveMaze(initialOutput, startLocationY, startLocationX);
+//        solveMaze(initialGrid , startLocationY, startLocationX);
+//        if(endLocationFound) {
+//            outputGridArray();
+//            outputGrid();
+//        }
     }
 
     private void initialiseGrid(String[][] array, int arrayHeight, int arrayWidth) {
         this.arrayHeight = arrayHeight;
         this.arrayWidth = arrayWidth;
-        grid = new Location[this.arrayHeight][arrayWidth];
-        for(int i = 0; i < this.arrayHeight; i++) {
+        initialOutput = array;
+        grid = new Location[arrayHeight][arrayWidth];
+        for(int i = 0; i < arrayHeight; i++) {
             for (int j =0; j<arrayWidth;j++){
                 grid[i][j] = new Location(Integer.parseInt(array[i][j]));
             }
@@ -51,25 +57,28 @@ public class MazeSolver {
         location is new and is traversable, set as new current location and
         recurse through method again till all reachable locations are checked
      */
-    private Boolean solveMaze(Location[][] grid, String[][] output, int currentLocationY, int currentLocationX) throws IOException {
+    private Boolean solveMaze(String[][] output, int currentLocationY, int currentLocationX) throws IOException {
+//    private Location[][] solveMaze(Location[][] grid, int currentLocationY, int currentLocationX) throws IOException {
         //set initial location as visited, to stop recursive function from returning to start location
         grid[currentLocationY][currentLocationX].setLocationVisited();
 
         // if current location is at end location
         if (currentLocationX == endLocationX && currentLocationY == endLocationY) {
             endLocationFound = true;
+            outputGridArray(output);
             return endLocationFound;
         } else if(!endLocationFound){ //stops further search if solution's found, however pending recursions continue
             //checks 4 directions from current location
             //check east
-            checkDirection(currentLocationY, currentLocationX+1);
+            checkDirection(output, currentLocationY, currentLocationX+1);
             //check south
-            checkDirection(currentLocationY+1, currentLocationX);
+            checkDirection(output, currentLocationY+1, currentLocationX);
             //check north
-            checkDirection(currentLocationY-1, currentLocationX);
+            checkDirection(output, currentLocationY-1, currentLocationX);
             //check west
-            checkDirection(currentLocationY, currentLocationX-1);
+            checkDirection(output, currentLocationY, currentLocationX-1);
         }
+        output[currentLocationY][currentLocationX]= " "; //TODO alternative via
         return endLocationFound;
     }
 
@@ -77,27 +86,27 @@ public class MazeSolver {
         generic method to check new location in any direction, if location is new and is traversable,
         then recurse through solveMaze method with new location
     */
-    private void checkDirection(int newLocationY, int newLocationX) throws IOException {
+    private void checkDirection(String[][] output, int newLocationY, int newLocationX) throws IOException {
        if(grid[newLocationY][newLocationX].isTraversablePassage()) {
            grid[newLocationY][newLocationX].setLocationVisited();
-           solveMaze(newLocationY, newLocationX);
+           output[newLocationY][newLocationX] = "X";
+           solveMaze(output, newLocationY, newLocationX);
        }
     }
 
-    //outputs grid as a system output
-    private void outputGrid() {
+    private void outputGridArray(String[][] output){
         for(int i = 0 ; i < arrayHeight;i++) {
             for(int j = 0;j < arrayWidth;j++) {
-                if (i == startLocationY && j == startLocationX) {
+                if (i == startLocationY && j == startLocationX){
                     System.out.print("S");
                 } else if (i == endLocationY && j == endLocationX) {
                     System.out.print("E");
-                } else if (grid[i][j].getLocationValue() == 1) {
+                } else if(output[i][j].equals("1")) {
                     System.out.print("#");
-                } else if (grid[i][j].getVisitedLocation() == true) {
-                    System.out.print("X");
-                } else if (grid[i][j].getLocationValue() == 0) {
+                } else if (output[i][j].equals("0")) {
                     System.out.print(" ");
+                } else {
+                    System.out.print(output[i][j]);
                 }
             }
             System.out.println("");
