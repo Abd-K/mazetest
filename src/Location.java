@@ -15,14 +15,6 @@ public class Location {
         this.isVisitedLocation = true;
     }
 
-    public Boolean getVisitedLocation() {
-        return isVisitedLocation;
-    }
-
-    public int getLocationValue() {
-        return locationValue;
-    }
-
     public Boolean isTraversablePassage() {
         return locationValue == 0 && !isVisitedLocation;
     }
