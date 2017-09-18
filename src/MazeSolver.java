@@ -14,7 +14,8 @@ public class MazeSolver {
     private int arrayWidth;
 
     private Location[][] grid;
-    private String[][] initialOutput;
+    private String[][] output;
+    private String[][] output2;
     private Boolean endLocationFound = false;
 
 
@@ -30,18 +31,13 @@ public class MazeSolver {
         endLocationX = rw.getEndLocationX();
         endLocationY = rw.getEndLocationY();
 
-        solveMaze(initialOutput, startLocationY, startLocationX);
-//        solveMaze(initialGrid , startLocationY, startLocationX);
-//        if(endLocationFound) {
-//            outputGridArray();
-//            outputGrid();
-//        }
+        solveMaze( startLocationY, startLocationX);
     }
 
     private void initialiseGrid(String[][] array, int arrayHeight, int arrayWidth) {
         this.arrayHeight = arrayHeight;
         this.arrayWidth = arrayWidth;
-        initialOutput = array;
+        output = array;
         grid = new Location[arrayHeight][arrayWidth];
         for(int i = 0; i < arrayHeight; i++) {
             for (int j =0; j<arrayWidth;j++){
@@ -57,53 +53,55 @@ public class MazeSolver {
         location is new and is traversable, set as new current location and
         recurse through method again till all reachable locations are checked
      */
-    private Boolean solveMaze(String[][] output, int currentLocationY, int currentLocationX) throws IOException {
-//    private Location[][] solveMaze(Location[][] grid, int currentLocationY, int currentLocationX) throws IOException {
+    private void solveMaze(int currentLocationY, int currentLocationX) throws IOException {
         //set initial location as visited, to stop recursive function from returning to start location
         grid[currentLocationY][currentLocationX].setLocationVisited();
 
         // if current location is at end location
         if (currentLocationX == endLocationX && currentLocationY == endLocationY) {
             endLocationFound = true;
-            outputGridArray(output);
-            return endLocationFound;
+            outputGridArray();
+            output2 = output;
         } else if(!endLocationFound){ //stops further search if solution's found, however pending recursions continue
             //checks 4 directions from current location
             //check east
-            checkDirection(output, currentLocationY, currentLocationX+1);
+            checkDirection(currentLocationY, currentLocationX+1);
             //check south
-            checkDirection(output, currentLocationY+1, currentLocationX);
+            checkDirection(currentLocationY+1, currentLocationX);
             //check north
-            checkDirection(output, currentLocationY-1, currentLocationX);
+            checkDirection(currentLocationY-1, currentLocationX);
             //check west
-            checkDirection(output, currentLocationY, currentLocationX-1);
+            checkDirection(currentLocationY, currentLocationX-1);
         }
-        output[currentLocationY][currentLocationX]= " "; //TODO alternative via
-        return endLocationFound;
+        output[currentLocationY][currentLocationX]= " "; //TODO alternative via passing output in recursion
     }
 
     /*
         generic method to check new location in any direction, if location is new and is traversable,
         then recurse through solveMaze method with new location
     */
-    private void checkDirection(String[][] output, int newLocationY, int newLocationX) throws IOException {
-       if(grid[newLocationY][newLocationX].isTraversablePassage()) {
-           grid[newLocationY][newLocationX].setLocationVisited();
+    private void checkDirection( int newLocationY, int newLocationX) throws IOException {
+       if(grid[newLocationY][newLocationX].isTraversablePassage() &&
+               !endLocationFound) {
            output[newLocationY][newLocationX] = "X";
-           solveMaze(output, newLocationY, newLocationX);
+           solveMaze( newLocationY, newLocationX);
        }
     }
 
-    private void outputGridArray(String[][] output){
+    private void outputGridArray(){
         for(int i = 0 ; i < arrayHeight;i++) {
             for(int j = 0;j < arrayWidth;j++) {
                 if (i == startLocationY && j == startLocationX){
+                    output[i][j] = "S";
                     System.out.print("S");
                 } else if (i == endLocationY && j == endLocationX) {
+                    output[i][j] = "E";
                     System.out.print("E");
                 } else if(output[i][j].equals("1")) {
+                    output[i][j] = "#";
                     System.out.print("#");
                 } else if (output[i][j].equals("0")) {
+                    output[i][j] = " ";
                     System.out.print(" ");
                 } else {
                     System.out.print(output[i][j]);
@@ -111,5 +109,9 @@ public class MazeSolver {
             }
             System.out.println("");
         }
+    }
+
+    public String[][] getOutput(){
+        return output2;
     }
 }
