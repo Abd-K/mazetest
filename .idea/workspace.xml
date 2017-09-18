@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="860c91c5-087b-49f2-a4b9-75c01daea35a" name="Default" comment="Fully functioning, with all scenarios passing with correct outputs">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/small2.txt" />
+    <list default="true" id="860c91c5-087b-49f2-a4b9-75c01daea35a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/mazeTest/main.class" afterPath="$PROJECT_DIR$/out/production/mazeTest/main.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main.java" afterPath="$PROJECT_DIR$/src/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MazeSolver.java" afterPath="$PROJECT_DIR$/src/MazeSolver.java" />
     </list>
     <ignored path="mazeTest.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,11 +30,11 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.9640832">
-              <caret line="36" column="111" selection-start-line="36" selection-start-column="111" selection-end-line="36" selection-end-column="111" />
+            <state vertical-scroll-proportion="0.39116204">
+              <caret line="21" column="35" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1505699157000" expanded="true" signature="2218:2227" placeholder="..." />
+                <marker date="1505699252000" expanded="true" signature="2218:2227" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -943,7 +941,7 @@
       <option name="number" value="Default" />
       <updated>1505513722435</updated>
       <workItem from="1505513725698" duration="22476000" />
-      <workItem from="1505660214259" duration="35918000" />
+      <workItem from="1505660214259" duration="35998000" />
     </task>
     <task id="LOCAL-00001" summary="basic input solved">
       <created>1505666313978</created>
@@ -981,11 +979,17 @@
       <option name="project" value="LOCAL" />
       <updated>1505694189027</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="added assertions for all scenarios">
+      <created>1505699217177</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1505699217178</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="58394000" />
+    <option name="totallyTimeSpent" value="58474000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1001,7 +1005,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32893288" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32893288" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3278328" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2970297" sideWeight="0.50646204" order="7" side_tool="true" content_ui="tabs" />
@@ -1017,7 +1021,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2970297" sideWeight="0.49353796" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2970297" sideWeight="0.49353796" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1068,7 +1072,8 @@
     <MESSAGE value="added result as system output" />
     <MESSAGE value="- added comments" />
     <MESSAGE value="Fully functioning, with all scenarios passing with correct outputs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fully functioning, with all scenarios passing with correct outputs" />
+    <MESSAGE value="added assertions for all scenarios" />
+    <option name="LAST_COMMIT_MESSAGE" value="added assertions for all scenarios" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1087,7 +1092,7 @@
           <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1505699157000" expanded="true" signature="2218:2227" placeholder="..." />
+            <marker date="1505699252000" expanded="true" signature="2218:2227" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -1283,11 +1288,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9640832">
-          <caret line="36" column="111" selection-start-line="36" selection-start-column="111" selection-end-line="36" selection-end-column="111" />
+        <state vertical-scroll-proportion="0.39116204">
+          <caret line="21" column="35" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1505699157000" expanded="true" signature="2218:2227" placeholder="..." />
+            <marker date="1505699252000" expanded="true" signature="2218:2227" placeholder="..." />
           </folding>
         </state>
       </provider>

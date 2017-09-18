@@ -29,7 +29,7 @@ public class Main {
         assertArraysMatch(new MazeSolver("resources/medium_input.txt").getOutput(), MEDIUM_INPUT_TEXT_PARTIAL_EXPECTED_RESULT, "medium_input.txt");
         assertArraysMatch(new MazeSolver("resources/large_input.txt").getOutput(), LARGE_INPUT_TEXT_PARTIAL_EXPECTED_RESULT, "large_input.txt");
 
-//        additional scenarios
+        //additional scenarios
         assertArraysMatch(new MazeSolver("resources/invalid_input.txt").getOutput(), INVALID_INPUT_EXPECTED_RESULT, "invalid_input.txt");
         assertArraysMatch(new MazeSolver("resources/small2.txt").getOutput(), SMALL_2_TEXT_EXPECTED_RESULT, "small2.txt");
     }
