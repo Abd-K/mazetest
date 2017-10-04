@@ -30,7 +30,7 @@ public class RawFileReader {
 
         line = (rawFile.split("\n"));
         for (int i = 0; i < arrayHeight; i++) {
-            list[i] = line[i].split(" ");
+            list[i] = line[i].split("\\s+");
         }
         return list;
     }
